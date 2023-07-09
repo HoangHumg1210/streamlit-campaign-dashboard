@@ -1,0 +1,109 @@
+header:
+  - utc_date
+  - traffic_source
+  - account_name
+  - campaign_manager
+  - device_viewed
+  - device_models
+  - browser
+  - month_name
+  - template_name
+  - country
+  - state
+  - city
+  - campaign_url 
+  - impressions
+  - page_clicks 
+  - revenue 
+  - blocked_clicks 
+  - ad_spend 
+  - paid_clicks 
+  - count_of_ads_returned 
+  - roas 
+  - rcp 
+  - cpc 
+  - cpa 
+  - gross_profit
+
+traffic_sources:
+  - Facebook Ads 
+  - LinkedIn Ads 
+  - YouTube Ads 
+  - Reddit Ads 
+  - TikTok Ads
+
+account_names: 
+  - Account 1 
+  - Account 2 
+  - Account 3 
+  - Account 4 
+  - Account 5
+
+
+campaign_managers: 
+  - Campaign Manager 1 
+  - Campaign Manager 2 
+  - Campaign Manager 3 
+  - Campaign Manager 4 
+  - Campaign Manager 5
+
+
+devices:
+  - Mobile
+  - Desktop
+  - Tablet
+
+device_models:
+
+  - Mobile:
+    - iPhone
+    - Android Phone
+
+  - Desktop:
+    - Macintosh
+    - Windows PC
+    - Linux PC
+
+  - Tablet:
+    - iPad
+    - iPod
+    - Android Tablet
+
+template_names:
+  - Summer Sale
+  - Flash Deal
+  - B2B Networking Event
+  - Professional Development Course
+  - Product Demo
+
+countries:
+  - United States 
+  - Canada 
+  - United Kingdom
+
+states: 
+  - California
+  - New York
+  - Texas
+  - Florida
+  - Ontario
+  - Quebec
+  - England  
+
+cities:
+  - Los Angeles
+  - New York
+  - San Francisco
+  - Toronto
+  - Montreal
+  - London
+  - Houston
+
+browsers:
+  - Chrome
+  - Firefox
+  - Safari
+  - Edge
+  - Opera
+  - Mozilla/5.0
+  - Mozilla/4.0

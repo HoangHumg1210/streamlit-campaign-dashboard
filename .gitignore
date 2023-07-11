@@ -1,0 +1,5 @@
+# vscode config file
+.vscode
+
+# env folder
+/st-env

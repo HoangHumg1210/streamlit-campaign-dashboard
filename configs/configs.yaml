@@ -10,7 +10,6 @@ header:
   - template_name
   - country
   - state
-  - city
   - campaign_url 
   - impressions
   - page_clicks 
@@ -31,6 +30,8 @@ traffic_sources:
   - YouTube Ads 
   - Reddit Ads 
   - TikTok Ads
+  - Instagram Ads
+  - Twitter Ads
 
 account_names: 
   - Account 1 
@@ -53,20 +54,18 @@ devices:
   - Desktop
   - Tablet
 
-device_models:
-
-  - Mobile:
+models:
+  Mobile:
     - iPhone
     - Android Phone
 
-  - Desktop:
+  Desktop:
     - Macintosh
     - Windows PC
     - Linux PC
 
-  - Tablet:
+  Tablet:
     - iPad
-    - iPod
     - Android Tablet
 
 template_names:
@@ -81,23 +80,27 @@ countries:
   - Canada 
   - United Kingdom
 
-states: 
-  - California
-  - New York
-  - Texas
-  - Florida
-  - Ontario
-  - Quebec
-  - England  
+states:
+  United States:
+    - California
+    - New York
+    - Texas
+    - Florida
+    - New Jersey
+    - New Mexico
+    - Georgia
 
-cities:
-  - Los Angeles
-  - New York
-  - San Francisco
-  - Toronto
-  - Montreal
-  - London
-  - Houston
+  Canada:
+    - Ontario
+    - Quebec
+    - British Columbia
+    - Nova Scotia
+    - Ontario
+
+  United Kingdom:
+    - England
+    - Northern Ireland
+    - Scotland
 
 browsers:
   - Chrome
@@ -105,5 +108,6 @@ browsers:
   - Safari
   - Edge
   - Opera
-  - Mozilla/5.0
-  - Mozilla/4.0
+
+file_path:
+  - 'data/campaign_data.csv'

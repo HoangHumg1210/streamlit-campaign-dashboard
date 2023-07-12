@@ -3,3 +3,6 @@
 
 # env folder
 /st-env
+
+# pycache folder
+__pycache__*

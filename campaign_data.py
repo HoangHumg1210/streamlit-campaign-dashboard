@@ -37,7 +37,7 @@ class CampaignDataGenerator:
         current_date = self.start_date
 
         while current_date <= self.end_date:
-            month_name = current_date.strftime('%b %Y')
+            month_name = current_date.strftime('%Y-%m')
             utc_date = current_date.strftime("%Y-%m-%d")
 
             traffic_source = random.choice(self.config['traffic_sources'])
@@ -65,7 +65,7 @@ class CampaignDataGenerator:
                 paid_clicks = page_clicks - blocked_clicks
                 count_of_ads_returned = random.randint(1, 2)
                 roas = revenue / ad_spend
-                rcp = revenue / page_clicks
+                rpc = revenue / page_clicks
                 cpc = ad_spend / page_clicks
                 cpa = ad_spend / paid_clicks if paid_clicks > 0 else 0
                 gross_profit = revenue - ad_spend
@@ -78,7 +78,7 @@ class CampaignDataGenerator:
                 paid_clicks = page_clicks - blocked_clicks
                 count_of_ads_returned = random.randint(2, 5)
                 roas = revenue / ad_spend
-                rcp = revenue / page_clicks
+                rpc = revenue / page_clicks
                 cpc = ad_spend / page_clicks
                 cpa = ad_spend / paid_clicks if paid_clicks > 0 else 0
                 gross_profit = revenue - ad_spend
@@ -89,7 +89,7 @@ class CampaignDataGenerator:
                 template_name, country, state, campaign_url,
                 impressions, page_clicks, revenue, blocked_clicks,
                 ad_spend, paid_clicks, count_of_ads_returned, roas,
-                rcp, cpc, cpa, gross_profit
+                rpc, cpc, cpa, gross_profit
             ]
 
             self.data.append(row)

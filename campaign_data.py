@@ -37,7 +37,6 @@ class CampaignDataGenerator:
         current_date = self.start_date
 
         while current_date <= self.end_date:
-            month_name = current_date.strftime('%Y-%m')
             utc_date = current_date.strftime("%Y-%m-%d")
 
             traffic_source = random.choice(self.config['traffic_sources'])
@@ -85,7 +84,7 @@ class CampaignDataGenerator:
 
             row = [
                 utc_date, traffic_source, account_name, campaign_manager,
-                device_viewed, device_model, browser, month_name,
+                device_viewed, device_model, browser,
                 template_name, country, state, campaign_url,
                 impressions, page_clicks, revenue, blocked_clicks,
                 ad_spend, paid_clicks, count_of_ads_returned, roas,

@@ -6,7 +6,6 @@ header:
   - device_viewed
   - device_models
   - browser
-  - month_name
   - template_name
   - country
   - state
@@ -19,7 +18,7 @@ header:
   - paid_clicks 
   - count_of_ads_returned 
   - roas 
-  - rcp 
+  - rpc 
   - cpc 
   - cpa 
   - gross_profit

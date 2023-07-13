@@ -1,14 +1,16 @@
 """Dashboard code"""
 
-import time
+import pandas as pd
 import streamlit as st
-import plotly.express as px
 from helpers.generate_metrics import get_metrics
-from helpers.generate_metrics import monthly_data
+from helpers.impressions_vs_clks import generate_imp_vs_clks
 
 st.set_page_config(layout='wide')
 
 st.title('Marketing Dashboard 📊')
+
+FILE_PATH = 'data/campaign_data.csv'
+df = pd.read_csv(FILE_PATH, parse_dates=[0, 1], infer_datetime_format=True)
 
 # Campaign Manager Filter
 option = st.selectbox(
@@ -21,8 +23,11 @@ if option == 'All Data':
 
 elif option == 'Campaign Manager level':
 
+    min_date = min(df.utc_date)
+    max_date = max(df.utc_date)
+
     with st.form(key='filters'):
-        cm, platform, test1, test2 = st.columns(4)
+        cm, platform, dfilter, tfilter = st.columns(4)
 
         CM_NAME = cm.selectbox(
             'Select Campaign Manager Name',
@@ -48,23 +53,50 @@ elif option == 'Campaign Manager level':
             )
         )
 
-        test1.text_input('Enter some text')
-        test2.text_input('Enter some more text')
+        date_filter = dfilter.date_input(
+            "Pick a Date Range",
+            (min_date, max_date)
+        )
+
+        template_used = tfilter.selectbox(
+            'Select Template Name (eg: Flash Deal, Summer Sale, etc)',
+            (
+                'Flash Deal',
+                'Summer Sale',
+                'Product Demo',
+                'B2B Networking Event',
+                'Professional Development Course'
+            )
+        )
+
+        start_date = pd.to_datetime(date_filter[0], format='%Y-%m-%d')
+        end_date = pd.to_datetime(date_filter[1], format='%Y-%m-%d')
 
         submitted = st.form_submit_button("Submit")
 
     if submitted:
+
+        df_filter = df[
+            (df['campaign_manager'] == CM_NAME) &
+            (df['traffic_source'] == CM_Platform) &
+            (df['utc_date'] >= start_date) &
+            (df['utc_date'] <= end_date) &
+            (df['template_name'] == template_used)
+        ]
+
         with st.spinner('Generating Report....'):
-            time.sleep(1)
-            st.text(f'Showing Data for: {CM_NAME} and for {CM_Platform} platform.')
-            fig = px.line(
-                monthly_data,
-                x = 'utc_date',
-                y = ['impressions', 'page_clicks'],
-                labels = {'value': 'Count'},
-                title = 'Monthly Impressions and Page Clicks'
+            st.write(df_filter)
+            # generate_imp_vs_clks(
+                # df_filter[
+                #     ['year_month', 'impressions', 'page_clicks']
+                # ]
+            # )
+            st.plotly_chart(
+                generate_imp_vs_clks(df_filter[
+                    ['year_month', 'impressions', 'page_clicks']
+                ]),
+                use_container_width=True
             )
-            st.plotly_chart(fig, use_container_width=True)
             st.balloons()
 
     # get_metrics(st)

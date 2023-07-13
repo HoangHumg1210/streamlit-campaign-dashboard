@@ -67,7 +67,7 @@ models:
     - iPad
     - Android Tablet
 
-template_names:
+template_name:
   - Summer Sale
   - Flash Deal
   - B2B Networking Event

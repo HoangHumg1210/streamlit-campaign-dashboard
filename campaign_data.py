@@ -42,7 +42,7 @@ class CampaignDataGenerator:
             traffic_source = random.choice(self.config['traffic_sources'])
             account_name = random.choice(self.config['account_names'])
             campaign_manager = random.choice(self.config['campaign_managers'])
-            template_name = random.choice(self.config['template_names'])
+            template_name = random.choice(self.config['template_name'])
 
             device_viewed = random.choice(self.config['devices'])
             device_models = self.models[device_viewed]

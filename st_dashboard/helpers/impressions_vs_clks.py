@@ -4,10 +4,12 @@ import plotly.express as px
 def generate_imp_vs_clks(data_frame):
     """
     Method to generate plotly line graph
+    
+    :param data_frame: Pandas dataframe
     """
 
     monthly_data = data_frame.groupby(
-            data_frame['year_month']
+            data_frame['utc_date']
         ).agg(
             {
                 'impressions': 'sum', 
@@ -17,7 +19,7 @@ def generate_imp_vs_clks(data_frame):
 
     fig = px.line(
         monthly_data,
-        x = 'year_month',
+        x = 'utc_date',
         y = ['impressions', 'page_clicks'],
         labels = {'value': 'Count'},
         title = 'Monthly Impressions and Page Clicks'

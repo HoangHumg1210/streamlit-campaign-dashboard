@@ -3,7 +3,12 @@
 import pandas as pd
 import streamlit as st
 from helpers.generate_metrics import get_metrics
-from helpers.impressions_vs_clks import generate_imp_vs_clks
+from helpers.impressions import generate_impressions
+from helpers.clicks import generate_clicks
+from helpers.device_viewed import generate_device_view_perc
+from helpers.top_campaigns import generate_top_campaign
+from helpers.browser_bar import generate_browser_view
+from helpers.paid_vs_page_clicks import generate_paid_vs_page_clicks
 
 st.set_page_config(layout='wide')
 
@@ -53,7 +58,6 @@ with st.form(key='filters'):
     submitted = st.form_submit_button("Submit")
 
 if submitted:
-
     df_filter = df[
         (df['campaign_manager'] == CM_NAME) &
         (df['traffic_source'] == CM_Platform) &
@@ -61,14 +65,63 @@ if submitted:
         (df['utc_date'] <= end_date)
     ]
 
-    get_metrics(df_filter, st)
+# Tab View
+ad_analysis, raw_data = st.tabs([
+    'Analysis',
+    'Raw Data'
+])
 
-    with st.spinner('Generating Report....'):
-        st.write(df_filter)
-        st.plotly_chart(
-            generate_imp_vs_clks(df_filter[
-                ['utc_date', 'impressions', 'page_clicks']
-            ]),
-            use_container_width=True
-        )
-        st.balloons()
+if submitted:
+    df_filter = df[
+        (df['campaign_manager'] == CM_NAME) &
+        (df['traffic_source'] == CM_Platform) &
+        (df['utc_date'] >= start_date) &
+        (df['utc_date'] <= end_date)
+    ]
+
+    with ad_analysis:
+        get_metrics(df_filter, st)
+
+        with st.spinner('Generating Report....'):
+
+            # Data Table
+            test_df = df_filter[
+                [
+                    'account_name', 'campaign_url', 'country',
+                    'impressions', 'page_clicks', 
+                    'ad_spend', 'revenue', 'gross_profit',
+                    'cpc', 'rpc', 'cpa', 'roas'
+                ]
+            ]
+
+            st.subheader('Campaign Stats')
+            st.dataframe(generate_top_campaign(test_df), use_container_width=True)
+
+
+            # Graphs
+            row1_col1, row1_col2 = st.columns(2)
+            row1_col1.plotly_chart(
+                generate_impressions(
+                    df_filter[['utc_date', 'impressions']]
+                )
+            )
+            row1_col2.plotly_chart(
+                generate_paid_vs_page_clicks(
+                    df_filter[['utc_date', 'page_clicks', 'paid_clicks']]
+                )
+            )
+
+            # Graphs
+            row2_col1, row2_col2 = st.columns(2)
+            row2_col1.plotly_chart(
+                generate_device_view_perc(df_filter['device_viewed'])
+            )
+
+            row2_col2.plotly_chart(
+                generate_browser_view(df_filter['browser'])
+            )
+
+            st.balloons()
+
+        with raw_data:
+            st.write(df_filter)

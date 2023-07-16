@@ -113,7 +113,7 @@ class CampaignDataGenerator:
             writer.writerows(data)
 
 # Input
-START_DATE = datetime(2018, 1, 1)
+START_DATE = datetime(2020, 1, 1)
 END_DATE = datetime(2022, 12, 31)
 CONFIG_FILE = 'configs/configs.yaml'
 

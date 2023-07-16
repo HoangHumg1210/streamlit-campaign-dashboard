@@ -23,4 +23,4 @@ def get_metrics(data_frame, st_obj):
     col2.metric("Total Clicks", clicks)
     col3.metric("CTR", f"{ctr}%")
     col4.metric("Total Gross Profit", gross_profit)
-    col5.metric("Total RPC", f"{avg_rpc}")
+    col5.metric("Avg RPC", f"{avg_rpc}")
